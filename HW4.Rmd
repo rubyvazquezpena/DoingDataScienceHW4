@@ -1,0 +1,52 @@
+---
+title: "Homework 4"
+author: "Ruby Vazquez Pena"
+date: "10/25/2016"
+output: html_document
+---
+
+```{r, include=TRUE}
+central.limit <- function(n,distribution=NULL,param1=NULL,param2=NULL) {
+  r <- 10000  ##number of replications/samples
+  # producing the samples
+  samples <- switch(distribution,
+                       "exp" = matrix(rexp(n*r,param1),r),
+                       "norm" = matrix(rnorm(n*r,param1,param2),r))
+  #taking the mean of each sample
+  allsamplemeans <- apply(samples,1,mean)   
+  ##above we illustrate the use of only the normal distribution and the exponential distribution
+  par(mfrow=c(1,2)) ##Setting up the graph display
+  ##distribution of on sample
+  hist(samples[1,],col="blue",main="Distribution of One Sample",xlab = "One Sample") 
+  ##distribution of the means
+  hist(allsamplemeans,col="red",main="Sampling Distribution of the Mean", xlab= "All Sample Means")
+  }
+```
+
+## Featured Examples
+
+
+```{r}
+central.limit(50,distribution="norm",10, 1)
+```
+
+
+
+```{r}
+central.limit(100,distribution="norm",10, 1)
+```
+
+
+```{r}
+central.limit(50,distribution="exp",10)
+```
+
+```{r}
+central.limit(100,distribution="exp",10)
+```
+
+
+
+
+
+
